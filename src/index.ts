@@ -28,4 +28,17 @@ app.use(session({
   }
 }))
 
+app.use(function (req, res, next) {
+  if (!req.session) {
+    return next(new Error('oh no')) // handle error
+  }
+  console.log(req.session);
+  
+  next() // otherwise continue
+})
+
+app.get('/', (request, response) => {
+  response.json({message: 'There you go again!!'});
+})
+
 app.listen(process.env.HTTP_PORT || 3003);
