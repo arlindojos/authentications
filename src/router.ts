@@ -1,9 +1,10 @@
 import { Request, Response, Router } from 'express';
+import passport from 'passport';
 
 import usersController from './controllers/usersController';
 const router = Router();  
 
-router.post('/login', usersController.index);
+router.post('/login', passport.authenticate('local'), usersController.index);
 router.post('/register', usersController.create);
 
 
